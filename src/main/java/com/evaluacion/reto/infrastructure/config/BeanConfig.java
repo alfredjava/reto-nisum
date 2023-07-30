@@ -5,6 +5,7 @@ import com.evaluacion.reto.application.UserUseCase;
 import com.evaluacion.reto.application.repository.UserPersistencePort;
 import com.evaluacion.reto.infrastructure.database.mapper.UserEntityMapper;
 import com.evaluacion.reto.infrastructure.rest.mapper.UserMapper;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,5 +23,10 @@ public class BeanConfig {
     @Bean
     public UserMapper userMapper() {
         return UserMapper.INSTANCE;
+    }
+
+    @Bean
+    WebProperties.Resources resources() {
+        return new WebProperties.Resources();
     }
 }

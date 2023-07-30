@@ -2,6 +2,7 @@ package com.evaluacion.reto.infrastructure.database.repository;
 
 import com.evaluacion.reto.application.repository.UserPersistencePort;
 import com.evaluacion.reto.domain.User;
+import com.evaluacion.reto.infrastructure.config.UserException;
 import com.evaluacion.reto.infrastructure.database.entity.UserEntity;
 import com.evaluacion.reto.infrastructure.database.mapper.UserEntityMapper;
 import com.evaluacion.reto.infrastructure.rest.dto.UserRequest;
@@ -39,7 +40,7 @@ public class UserRepository implements UserPersistencePort {
     public Mono<User> saveUser(UserRequest userRequest) {
 
         if (validatePassword(userRequest.getPassword())) {
-            return Mono.error(new Exception(mesagePassword));
+            return Mono.error( UserException.builder().statusCode(400).description(mesagePassword).build());
         }
 
 

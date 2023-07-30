@@ -31,7 +31,6 @@ public class WebSecurityConfiguration {
                 .pathMatchers(HttpMethod.POST, "/v1/tokens").permitAll()
                 .pathMatchers(HttpMethod.POST, "/v1/users").permitAll()
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                .pathMatchers(HttpMethod.GET, "/h2-console/**").permitAll()
                 .anyExchange().denyAll()
                 .and().build();
     }
