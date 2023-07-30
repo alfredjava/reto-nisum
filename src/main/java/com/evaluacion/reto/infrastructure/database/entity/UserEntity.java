@@ -20,11 +20,13 @@ public class UserEntity {
     private UUID id;
     private String name;
     private String email;
+    @With
     private String password;
     @Column("active")
     private Boolean isActive;
     private LocalDateTime created;
     private LocalDateTime modified;
     @Column("last_login")
+    @With
     private LocalDateTime lastLogin;
 }

@@ -1,5 +1,6 @@
 package com.evaluacion.reto.infrastructure.rest.dto;
 
+import javax.validation.constraints.*;
 import java.util.List;
 
 @lombok.Data
@@ -19,8 +20,13 @@ public class UserRequest {
      * }
      */
     // generate attributes here
+    @NotBlank(message = "El campo 'name' no puede estar en blanco")
+    @Size(max = 100, message = "El campo 'name' debe tener como máximo {max} caracteres")
     private String name;
+    @NotBlank(message = "El campo 'correo' no puede estar en blanco")
+    @Email(message = "El campo 'correo' debe ser una dirección de correo electrónico válida")
     private String email;
+    @NotBlank(message = "El campo 'password' no puede estar en blanco")
     private String password;
     private List<Phone> phones;
 

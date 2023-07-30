@@ -13,8 +13,14 @@ import reactor.core.publisher.Mono;
 public class UserServices implements UserUseCase{
 
     private final UserPersistencePort userPersistencePort;
+
     @Override
     public Mono<User> saveUser(UserRequest userRequest) {
         return userPersistencePort.saveUser(userRequest);
+    }
+
+    @Override
+    public Mono<User> login(String email, String password) {
+        return userPersistencePort.login(email,password);
     }
 }

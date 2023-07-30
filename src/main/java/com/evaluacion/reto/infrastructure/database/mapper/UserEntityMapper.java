@@ -8,7 +8,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 
-
 @Mapper(nullValueCheckStrategy = org.mapstruct.NullValueCheckStrategy.ALWAYS,builder = @Builder(disableBuilder = true))
 public interface UserEntityMapper {
 
@@ -16,7 +15,6 @@ public interface UserEntityMapper {
     @Mapping(target ="isActive",expression = "java(true)")
     @Mapping(target ="created",expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target ="modified",expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target ="lastLogin",expression = "java(java.time.LocalDateTime.now())")
     UserEntity toEntity(UserRequest userRequest);
 
 

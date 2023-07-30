@@ -7,26 +7,7 @@ CREATE TABLE users(
                       active BOOLEAN,
                       created TIMESTAMP,
                       modified TIMESTAMP,
-                      last_Login TIMESTAMP
-);
-
-DROP TABLE IF EXISTS phone;
-
-CREATE TABLE phone(
-                       id INT AUTO_INCREMENT  PRIMARY KEY,
-                       user_id VARCHAR(200) NOT NULL,
-                       phone_number VARCHAR(20) NOT NULL,
-                       city_code VARCHAR(5) NOT NULL,
-                       country_code VARCHAR(5) NOT NULL
-);
-
-DROP TABLE IF EXISTS user_session;
-
-CREATE TABLE user_session(
-                      id INT AUTO_INCREMENT  PRIMARY KEY,
-                      user_id VARCHAR(200) NOT NULL,
-                      last_Login TIMESTAMP NOT NULL,
-                      token VARCHAR(500) NOT NULL
+                      last_login TIMESTAMP
 );
 
 DROP TABLE IF EXISTS token_authorization;
@@ -36,4 +17,3 @@ CREATE TABLE token_authorization(
                              token VARCHAR(200) NOT NULL
 );
 
-insert into token_authorization(token) values('ueyuy-ueyweyu-iueii-ieuiu');

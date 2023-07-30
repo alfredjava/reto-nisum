@@ -16,5 +16,7 @@ public class User {
     private LocalDateTime created;
     private LocalDateTime modified;
     private LocalDateTime lastLogin;
+    @With
+    private String token;
     private Boolean isActive;
 }
