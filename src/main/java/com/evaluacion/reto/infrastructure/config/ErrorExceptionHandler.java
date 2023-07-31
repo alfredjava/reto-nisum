@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.*;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
@@ -22,9 +23,9 @@ import java.util.Map;
 
 @Component
 @Order(-9)
-public class GlobantErrorExceptionHandler extends AbstractErrorWebExceptionHandler {
+public class ErrorExceptionHandler extends AbstractErrorWebExceptionHandler {
 
-    public GlobantErrorExceptionHandler(ErrorAttributes errorAttributes, WebProperties.Resources resources, ApplicationContext applicationContext, ServerCodecConfigurer configurer) {
+    public ErrorExceptionHandler(ErrorAttributes errorAttributes, WebProperties.Resources resources, ApplicationContext applicationContext, ServerCodecConfigurer configurer) {
         super(errorAttributes, resources, applicationContext);
         this.setMessageWriters(configurer.getWriters());
     }
@@ -47,10 +48,18 @@ public class GlobantErrorExceptionHandler extends AbstractErrorWebExceptionHandl
             httpStatus=HttpStatus.valueOf(apiException.getStatusCode());
             errorMap.put("message",apiException.getDescription());
 
-        }else{
+        } else if (exception instanceof WebExchangeBindException) {
             var exception1 = ((WebExchangeBindException) exception);
-            httpStatus=exception1.getStatus();
+            httpStatus = exception1.getStatus();
             errorMap.put("message",exception1.getAllErrors().get(0).getDefaultMessage());
+        } else if (exception instanceof ResponseStatusException) {
+            var exception1 = ((ResponseStatusException) exception);
+            httpStatus = exception1.getStatus();
+            errorMap.put("message",exception1.getMessage());
+        }
+        else{
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+            errorMap.put("message","Error interno");
         }
 
         return ServerResponse.status(httpStatus).contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(errorMap));

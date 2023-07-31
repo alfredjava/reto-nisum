@@ -19,7 +19,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/users")
+@RequestMapping("/api/users")
 @Slf4j
 public class UserController {
     private final UserUseCase userUseCase;
@@ -33,7 +33,11 @@ public class UserController {
                 .switchIfEmpty(userUseCase.saveUser(userRequest)
                         .doOnSuccess(user -> log.info("User created: {}", user))
                         .map(user -> new ResponseEntity<>(userMapper.toDto(user),
-                        HttpStatus.CREATED)).doOnError(error -> Mono.error(new Exception("Error creating user"))));
+                        HttpStatus.CREATED)).doOnError(error -> Mono.error(new Exception("Error creating user"))))
+                .doOnError(error -> {
+                    log.error("Error controller: {}", error.getMessage());
+                    Mono.error(new Exception("Error controller"));
+                });
 
 
 

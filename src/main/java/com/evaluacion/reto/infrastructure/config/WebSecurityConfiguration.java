@@ -28,8 +28,8 @@ public class WebSecurityConfiguration {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeExchange()
-                .pathMatchers(HttpMethod.POST, "/v1/tokens").permitAll()
-                .pathMatchers(HttpMethod.POST, "/v1/users").permitAll()
+                .pathMatchers(HttpMethod.POST, "/api/tokens").permitAll()
+                .pathMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyExchange().denyAll()
                 .and().build();
