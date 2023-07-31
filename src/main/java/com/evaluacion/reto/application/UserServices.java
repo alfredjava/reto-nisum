@@ -19,11 +19,13 @@ public class UserServices implements UserUseCase{
     public Mono<User> saveUser(UserRequest userRequest) {
         return userPersistencePort.saveUser(userRequest)
                 .doOnSuccess(user -> log.info("User created: {}", user))
-                .doOnError(error -> Mono.error(UserException.builder().description (error.getMessage()).statusCode(400).systemCode("400").build()));
+                .doOnError(error -> Mono.error(new Exception(error.getMessage())));
     }
 
     @Override
     public Mono<User> login(String email, String password) {
-        return userPersistencePort.login(email,password);
+        return userPersistencePort.login(email,password)
+                .doOnSuccess(user -> log.info("User created: {}", user))
+                .doOnError(error -> Mono.error(new Exception(error.getMessage())));
     }
 }

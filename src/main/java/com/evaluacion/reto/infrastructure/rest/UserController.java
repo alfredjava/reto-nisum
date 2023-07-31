@@ -25,18 +25,30 @@ public class UserController {
     private final UserUseCase userUseCase;
     private final UserMapper userMapper;
 
-    @PostMapping
+    @PostMapping("/save")
+    public Mono<ResponseEntity<UserDto>> userSave(@RequestBody @Valid UserRequest userRequest) {
+
+        return userUseCase.saveUser(userRequest)
+                        .doOnSuccess(user -> log.info("User created: {}", user))
+                        .map(user -> new ResponseEntity<>(userMapper.toDto(user),
+                        HttpStatus.CREATED)).doOnError(error -> Mono.error(new Exception("Error creating user")))
+                .doOnError(error -> {
+                    log.error("Error controller userSave: {}", error.getMessage());
+                    Mono.error(new Exception("Error controller userSave"));
+                });
+
+
+
+    }
+    @PostMapping("/login")
     public Mono<ResponseEntity<UserDto>> login(@RequestBody @Valid UserRequest userRequest) {
 
         return userUseCase.login(userRequest.getEmail(), userRequest.getPassword())
                 .flatMap(user -> Mono.just(new ResponseEntity<>(userMapper.toDto(user), HttpStatus.OK)))
-                .switchIfEmpty(userUseCase.saveUser(userRequest)
-                        .doOnSuccess(user -> log.info("User created: {}", user))
-                        .map(user -> new ResponseEntity<>(userMapper.toDto(user),
-                        HttpStatus.CREATED)).doOnError(error -> Mono.error(new Exception("Error creating user"))))
+                .doOnSuccess(user -> log.info("User login: {}", user))
                 .doOnError(error -> {
-                    log.error("Error controller: {}", error.getMessage());
-                    Mono.error(new Exception("Error controller"));
+                    log.error("Error controller login: {}", error.getMessage());
+                    Mono.error(new Exception("Error controller login"));
                 });
 
 

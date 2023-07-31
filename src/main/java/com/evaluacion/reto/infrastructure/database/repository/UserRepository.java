@@ -43,15 +43,27 @@ public class UserRepository implements UserPersistencePort {
             return Mono.error( UserException.builder().statusCode(400).description(mesagePassword).build());
         }
 
+        // create metodo para validar si el usuario ya existe
+        return userExist(userRequest.getEmail()).flatMap(userExist -> {
+            if (userExist) {
+                return Mono.error(UserException.builder().statusCode(409).description("User already exists").build());
+            } else {
+                return userJpaRepository.save(userEntityMapper.toEntity(userRequest)
+                        .withPassword(passwordEncoder.encode(userRequest.getPassword()))
+                                .withLastLogin(java.time.LocalDateTime.now()))
+                        .map(userEntity -> userEntityMapper.toDomain(userEntity).withToken(generateToken(userEntity)))
+                        .doOnSuccess(user -> log.info("User saved id {}" , user.getId()))
+                        .subscribeOn(Schedulers.boundedElastic());
+            }
+        });
 
+    }
 
-        return userJpaRepository.save(userEntityMapper.toEntity(userRequest)
-                .withPassword(passwordEncoder.encode(userRequest.getPassword())).withLastLogin(java.time.LocalDateTime.now()))
-                .map(userEntity -> userEntityMapper.toDomain(userEntity).withToken(generateToken(userEntity)))
-                .doOnSuccess(user -> log.info("User saved id {}" , user.getId()))
-                .subscribeOn(Schedulers.boundedElastic());
-
-
+    private Mono<Boolean> userExist(String email) {
+        return userJpaRepository.findByEmail(email).map(userEntity -> {
+            log.info("User already exists");
+            return true;
+        }).switchIfEmpty(Mono.just(false));
     }
 
     private boolean validatePassword(String password) {
@@ -79,8 +91,8 @@ public class UserRepository implements UserPersistencePort {
 
                     } else {
                         log.info("password incorrecto");
-                        return null;
                     }
+                    return null;
                 }
         );
 

@@ -29,7 +29,8 @@ public class WebSecurityConfiguration {
                 .httpBasic().disable()
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.POST, "/api/tokens").permitAll()
-                .pathMatchers(HttpMethod.POST, "/api/users").permitAll()
+                .pathMatchers(HttpMethod.POST, "/api/users/save").permitAll()
+                .pathMatchers(HttpMethod.POST, "/api/users/login").permitAll()
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyExchange().denyAll()
                 .and().build();
