@@ -31,7 +31,7 @@ This is a simple example of a Spring WebFlux API REST application that uses an H
     The following are the available API endpoints:
 
 - **Create a Resource**
-- POST /api/users
+- POST /api/users/save
   - Request Body:
     {
     "name": "Alfredo",
@@ -46,6 +46,22 @@ This is a simple example of a Spring WebFlux API REST application that uses an H
     ]
     }
 
+- POST /api/users/login
+    - Request Body:
+      {
+      "name": "Alfredo",
+      "email": "alfredfis5@gmail.com",
+      "password": "holas1Holas7",
+      "phones": [
+      {
+      "number": "953727079",
+      "cityCode": "01",
+      "countryCode": "+51"
+      }
+      ]
+      }
+## Descargar collection de postman
+[retonisum.postman_collection.json](retonisum.postman_collection.json)
 ## Diagrama
 // insertar diagrama de arquitectura hexagonal front resources directory
-![alt text](HexagonalArchitectureNisum.jpg)
+![HexagonalArchitectureNisum.jpg](HexagonalArchitectureNisum.jpg)

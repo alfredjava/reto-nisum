@@ -94,7 +94,7 @@ public class UserRepository implements UserPersistencePort {
                     }
                     return null;
                 }
-        );
+        ).switchIfEmpty(Mono.error(UserException.builder().statusCode(404).description("User not found").build()));
 
     }
 
