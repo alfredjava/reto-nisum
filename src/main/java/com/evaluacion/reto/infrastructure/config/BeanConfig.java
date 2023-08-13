@@ -2,7 +2,7 @@ package com.evaluacion.reto.infrastructure.config;
 
 import com.evaluacion.reto.application.UserServices;
 import com.evaluacion.reto.application.UserUseCase;
-import com.evaluacion.reto.application.repository.UserPersistencePort;
+import com.evaluacion.reto.domain.port.UserPersistencePort;
 import com.evaluacion.reto.infrastructure.database.mapper.UserEntityMapper;
 import com.evaluacion.reto.infrastructure.rest.mapper.UserMapper;
 import org.springframework.boot.autoconfigure.web.WebProperties;

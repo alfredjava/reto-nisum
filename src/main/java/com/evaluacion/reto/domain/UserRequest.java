@@ -1,4 +1,4 @@
-package com.evaluacion.reto.infrastructure.rest.dto;
+package com.evaluacion.reto.domain;
 
 import javax.validation.constraints.*;
 import java.util.List;

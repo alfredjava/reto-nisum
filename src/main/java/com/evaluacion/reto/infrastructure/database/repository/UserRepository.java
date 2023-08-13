@@ -1,11 +1,11 @@
 package com.evaluacion.reto.infrastructure.database.repository;
 
-import com.evaluacion.reto.application.repository.UserPersistencePort;
+import com.evaluacion.reto.domain.port.UserPersistencePort;
 import com.evaluacion.reto.domain.User;
 import com.evaluacion.reto.infrastructure.config.UserException;
 import com.evaluacion.reto.infrastructure.database.entity.UserEntity;
 import com.evaluacion.reto.infrastructure.database.mapper.UserEntityMapper;
-import com.evaluacion.reto.infrastructure.rest.dto.UserRequest;
+import com.evaluacion.reto.domain.UserRequest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;

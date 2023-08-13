@@ -4,7 +4,7 @@ import com.evaluacion.reto.application.UserUseCase;
 import com.evaluacion.reto.domain.User;
 import com.evaluacion.reto.infrastructure.config.UserException;
 import com.evaluacion.reto.infrastructure.rest.dto.UserDto;
-import com.evaluacion.reto.infrastructure.rest.dto.UserRequest;
+import com.evaluacion.reto.domain.UserRequest;
 import com.evaluacion.reto.infrastructure.rest.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 

@@ -2,7 +2,7 @@ package com.evaluacion.reto.infrastructure.rest;
 
 import com.evaluacion.reto.application.UserUseCase;
 import com.evaluacion.reto.infrastructure.rest.dto.UserDto;
-import com.evaluacion.reto.infrastructure.rest.dto.UserRequest;
+import com.evaluacion.reto.domain.UserRequest;
 import com.evaluacion.reto.infrastructure.rest.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

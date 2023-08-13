@@ -1,10 +1,9 @@
 package com.evaluacion.reto.application;
 
 
-import com.evaluacion.reto.application.repository.UserPersistencePort;
+import com.evaluacion.reto.domain.port.UserPersistencePort;
 import com.evaluacion.reto.domain.User;
-import com.evaluacion.reto.infrastructure.config.UserException;
-import com.evaluacion.reto.infrastructure.rest.dto.UserRequest;
+import com.evaluacion.reto.domain.UserRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;

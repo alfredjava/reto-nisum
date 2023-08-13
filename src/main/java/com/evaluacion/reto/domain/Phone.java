@@ -1,4 +1,4 @@
-package com.evaluacion.reto.infrastructure.rest.dto;
+package com.evaluacion.reto.domain;
 
 
 @lombok.Data

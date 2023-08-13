@@ -2,7 +2,7 @@ package com.evaluacion.reto.infrastructure.database.mapper;
 
 import com.evaluacion.reto.domain.User;
 import com.evaluacion.reto.infrastructure.database.entity.UserEntity;
-import com.evaluacion.reto.infrastructure.rest.dto.UserRequest;
+import com.evaluacion.reto.domain.UserRequest;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

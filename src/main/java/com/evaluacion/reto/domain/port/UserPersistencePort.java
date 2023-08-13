@@ -1,8 +1,8 @@
-package com.evaluacion.reto.application.repository;
+package com.evaluacion.reto.domain.port;
 
 
 import com.evaluacion.reto.domain.User;
-import com.evaluacion.reto.infrastructure.rest.dto.UserRequest;
+import com.evaluacion.reto.domain.UserRequest;
 import reactor.core.publisher.Mono;
 
 public interface UserPersistencePort {
